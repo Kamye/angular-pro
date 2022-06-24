@@ -2,24 +2,24 @@ import {Component} from '@angular/core';
 import {User} from "./auth-form/auth-form.interface";
 
 @Component({
-    selector: 'app-content-projection',
+    selector: 'content-projection',
     template: `
         <div style="display: flex">
-            <app-auth-form
+            <auth-form
                 (submitted)="createUser($event)">
                 <h3>Create account</h3>
                 <button type="submit">
                     Join Us
                 </button>
-            </app-auth-form>
+            </auth-form>
 
-            <app-auth-form
+            <auth-form
                 (submitted)="loginUser($event)">
                 <h3>Login</h3>
                 <button type="submit">
                     Login
                 </button>
-            </app-auth-form>
+            </auth-form>
         </div>
     `
 })

@@ -3,7 +3,7 @@ import {Component, EventEmitter, Output} from '@angular/core';
 import {User} from "./auth-form.interface";
 
 @Component({
-    selector: 'app-auth-form',
+    selector: 'auth-form',
     template: `
         <div>
             <form (submit)="onSubmit(form.value)" #form="ngForm">
