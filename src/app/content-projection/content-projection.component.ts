@@ -1,31 +1,39 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {User} from "./auth-form/auth-form.interface";
 
 @Component({
-  selector: 'app-content-projection',
-  template: `
-    <div style="display: flex">
-      <app-auth-form
-        (submitted)="createUser($event)">
-        <h3>Create account</h3>
-      </app-auth-form>
-      <app-auth-form
-        (submitted)="loginUser($event)">
-        <h3>Login</h3>
-      </app-auth-form>
-    </div>
-  `
+    selector: 'app-content-projection',
+    template: `
+        <div style="display: flex">
+            <app-auth-form
+                (submitted)="createUser($event)">
+                <h3>Create account</h3>
+                <button type="submit">
+                    Join Us
+                </button>
+            </app-auth-form>
+
+            <app-auth-form
+                (submitted)="loginUser($event)">
+                <h3>Login</h3>
+                <button type="submit">
+                    Login
+                </button>
+            </app-auth-form>
+        </div>
+    `
 })
 export class ContentProjectionComponent {
 
-  constructor() { }
+    constructor() {
+    }
 
-  public createUser(user: User) {
-    console.log('Create account', user);
-  }
+    public createUser(user: User) {
+        console.log('Create account', user);
+    }
 
-  public loginUser(user: User) {
-    console.log('Login user', user);
-  }
+    public loginUser(user: User) {
+        console.log('Login user', user);
+    }
 
 }
