@@ -5,8 +5,7 @@ import {User} from "./auth-form/auth-form.interface";
     selector: 'content-projection',
     template: `
         <div style="display: flex">
-            <auth-form
-                (submitted)="createUser($event)">
+            <auth-form (submitted)="createUser($event)">
                 <h3>Create account</h3>
                 <button type="submit">
                     Join Us
@@ -29,8 +28,6 @@ export class ContentProjectionComponent {
 
     private rememberMe: boolean = false;
 
-    constructor() {
-    }
 
     public createUser(user: User) {
         console.log('Create account', user, this.rememberMe);
