@@ -4,7 +4,7 @@ import {
     Output,
     ContentChildren,
     QueryList,
-    AfterContentInit, ViewChild, AfterViewInit,
+    AfterContentInit, ViewChildren, AfterViewInit, ChangeDetectorRef,
 } from '@angular/core';
 
 import {AuthRememberComponent} from './auth-remember.component';
@@ -30,6 +30,12 @@ import {User} from './auth-form.interface';
                 <auth-message
                     [style.display]="(showMessage ? 'inherit' : 'none')">
                 </auth-message>
+                <auth-message
+                    [style.display]="(showMessage ? 'inherit' : 'none')">
+                </auth-message>
+                <auth-message
+                    [style.display]="(showMessage ? 'inherit' : 'none')">
+                </auth-message>
                 <ng-content select="button"></ng-content>
             </form>
         </div>
@@ -40,15 +46,16 @@ export class AuthFormComponent implements AfterContentInit, AfterViewInit {
 
     @ContentChildren(AuthRememberComponent) remember: QueryList<AuthRememberComponent> | undefined;
 
-    @ViewChild(AuthMessageComponent) message: AuthMessageComponent | undefined;
+    @ViewChildren(AuthMessageComponent) message: QueryList<AuthMessageComponent> | undefined;
 
     @Output() submitted: EventEmitter<User> = new EventEmitter<User>();
 
-    ngAfterContentInit() {
-        if (this.message) {
-            this.message.days = 30;
-        }
+    constructor(
+        private cdr: ChangeDetectorRef
+    ) {
+    }
 
+    ngAfterContentInit() {
         if (this.remember) {
             this.remember.forEach((item: AuthRememberComponent) => {
                 item.checked.subscribe((checked: boolean) => this.showMessage = checked);
@@ -57,7 +64,12 @@ export class AuthFormComponent implements AfterContentInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        // this.message!.days = 30;
+        if (this.message) {
+            this.message.forEach((message: AuthMessageComponent) => {
+                message.days = 30;
+            });
+            this.cdr.detectChanges();
+        }
     }
 
     public onSubmit(value: User) {
