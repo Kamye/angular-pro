@@ -1,35 +1,41 @@
-import {Component} from '@angular/core';
-import {User} from "./auth-form/auth-form.interface";
+import {
+    AfterViewInit, ChangeDetectorRef,
+    Component,
+    ComponentRef, OnInit,
+    ViewChild,
+    ViewContainerRef
+} from '@angular/core';
+
+import {AuthFormComponent} from './auth-form/auth-form.component';
 
 @Component({
     selector: 'content-projection',
     template: `
         <div style="display: flex">
-            <auth-form
-                (submitted)="loginUser($event)">
-                <h3>Login</h3>
-                <auth-remember (checked)="rememberUser($event)"></auth-remember>
-                <button type="submit">
-                    Login
-                </button>
-            </auth-form>
+            <div #entry></div>
         </div>
     `
 })
-export class ContentProjectionComponent {
+export class ContentProjectionComponent implements OnInit, AfterViewInit {
 
-    private rememberMe: boolean = false;
+    @ViewChild('entry', { read: ViewContainerRef })
+    private entry!: ViewContainerRef;
+    private componentRef!: ComponentRef<AuthFormComponent>;
 
-
-    public createUser(user: User) {
-        console.log('Create account', user, this.rememberMe);
+    constructor(private cdr: ChangeDetectorRef) {
     }
 
-    public loginUser(user: User) {
-        console.log('Login user', user, this.rememberMe);
+    ngOnInit() {
+
     }
 
-    public rememberUser(remember: boolean) {
-        this.rememberMe = remember;
+    ngAfterViewInit() {
+        this.entry.clear();
+        this.componentRef = this.entry.createComponent(AuthFormComponent);
+        this.cdr.detectChanges();
     }
+
+    // public loginUser(user: User) {
+    //     console.log('Login user', user, this.rememberMe);
+    // }
 }
