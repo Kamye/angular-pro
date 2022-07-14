@@ -2,7 +2,7 @@ import {
     AfterViewInit,
     ChangeDetectorRef,
     Component,
-    ComponentFactoryResolver,
+    ComponentFactoryResolver, ComponentRef,
     ViewChild,
     ViewContainerRef
 } from '@angular/core';
@@ -14,12 +14,17 @@ import {User} from './auth-form/auth-form.interface';
 @Component({
     selector: 'content-projection',
     template: `
-        <div style="display: flex">
+        <div>
+            <button (click)="destroyComponent()">
+                Destroy
+            </button>
             <div #entry></div>
         </div>
     `
 })
 export class ContentProjectionComponent implements AfterViewInit{
+
+    private component!: ComponentRef<AuthFormComponent>;
 
     @ViewChild('entry', { read: ViewContainerRef }) entry!: ViewContainerRef;
 
@@ -31,14 +36,18 @@ export class ContentProjectionComponent implements AfterViewInit{
 
     ngAfterViewInit() {
         const authFormFactory = this.resolver.resolveComponentFactory(AuthFormComponent);
-        const component = this.entry.createComponent(authFormFactory);
-        component.instance.title = 'Create account';
-        component.instance.submitted.subscribe(this.loginUser);
+        this.component = this.entry.createComponent(authFormFactory);
+        this.component.instance.title = 'Create account';
+        this.component.instance.submitted.subscribe(this.loginUser);
 
         this.cdr.detectChanges();
     }
 
     public loginUser(user: User) {
         console.log('Login user', user);
+    }
+
+    public destroyComponent(): void {
+        this.component.destroy();
     }
 }
