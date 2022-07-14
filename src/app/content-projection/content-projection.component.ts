@@ -18,6 +18,9 @@ import {User} from './auth-form/auth-form.interface';
             <button (click)="destroyComponent()">
                 Destroy
             </button>
+            <button (click)="moveComponent()">
+                Move
+            </button>
             <div #entry></div>
         </div>
     `
@@ -36,18 +39,23 @@ export class ContentProjectionComponent implements AfterViewInit{
 
     ngAfterViewInit() {
         const authFormFactory = this.resolver.resolveComponentFactory(AuthFormComponent);
-        this.component = this.entry.createComponent(authFormFactory);
+        this.entry.createComponent(authFormFactory);
+        this.component = this.entry.createComponent(authFormFactory, 0);
         this.component.instance.title = 'Create account';
         this.component.instance.submitted.subscribe(this.loginUser);
 
         this.cdr.detectChanges();
     }
 
-    public loginUser(user: User) {
-        console.log('Login user', user);
-    }
-
     public destroyComponent(): void {
         this.component.destroy();
+    }
+
+    public moveComponent(): void {
+        this.entry.move(this.component.hostView, 1);
+    }
+
+    public loginUser(user: User) {
+        console.log('Login user', user);
     }
 }
