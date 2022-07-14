@@ -31,7 +31,8 @@ export class ContentProjectionComponent implements AfterViewInit{
 
     ngAfterViewInit() {
         const authFormFactory = this.resolver.resolveComponentFactory(AuthFormComponent);
-        this.entry.createComponent(authFormFactory);
+        const component = this.entry.createComponent(authFormFactory);
+        component.instance.title = 'Create account';
 
         this.cdr.detectChanges();
     }
