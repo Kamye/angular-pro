@@ -12,8 +12,8 @@ import {
     template: `
         <div>
             <div #entry></div>
-            <ng-template #tmpl>
-                Andriy Hanzha : Dnipro, UA
+            <ng-template #tmpl let-name let-location="location">
+                {{ name }} : {{ location }}
             </ng-template>
         </div>
     `
@@ -30,7 +30,10 @@ export class ContentProjectionComponent implements AfterViewInit{
     }
 
     ngAfterViewInit() {
-        this.entry.createEmbeddedView(this.tmpl);
+        this.entry.createEmbeddedView(this.tmpl, {
+            $implicit: 'Hanzha Andriy',
+            location: 'UA, Dnipro'
+        });
         this.cdr.detectChanges();
     }
 
