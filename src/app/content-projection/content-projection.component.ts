@@ -33,6 +33,7 @@ export class ContentProjectionComponent implements AfterViewInit{
         const authFormFactory = this.resolver.resolveComponentFactory(AuthFormComponent);
         const component = this.entry.createComponent(authFormFactory);
         component.instance.title = 'Create account';
+        component.instance.submitted.subscribe(this.loginUser);
 
         this.cdr.detectChanges();
     }
