@@ -12,6 +12,7 @@ import {ThreeComponent} from './three/three.component';
         ThreeComponent
     ],
     exports: [
+        ViewEncapsulationComponent
 
     ],
     imports: [
