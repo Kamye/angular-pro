@@ -5,14 +5,18 @@ import {Component} from '@angular/core';
     template: `
         <div>
             <ng-container
-                [ngTemplateOutlet]="tmpl">
+                [ngTemplateOutlet]="tmpl"
+                [ngTemplateOutletContext]="ctx">
             </ng-container>
-            <ng-template #tmpl>
-                Andriy Hanzha: Dnipro, UA
+            <ng-template #tmpl let-name let-location="location">
+                {{ name }} : {{ location }}
             </ng-template>
         </div>
     `
 })
 export class ContentProjectionComponent {
-
+    public ctx = {
+        $implicit: 'Andriy Hanzha',
+        location: 'Dnipro, UA'
+    }
 }
