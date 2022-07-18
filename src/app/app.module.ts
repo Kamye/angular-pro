@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {ContentProjectionModule} from "./content-projection/content-projection.module";
+import {ViewEncapsulationModule} from './view-encapsulation/view-encapsulation.module';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import {ContentProjectionModule} from "./content-projection/content-projection.m
     imports: [
         BrowserModule,
         AppRoutingModule,
-        ContentProjectionModule
+        ContentProjectionModule,
+        ViewEncapsulationModule
     ],
   providers: [],
   bootstrap: [AppComponent]
