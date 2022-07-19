@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {ContentProjectionModule} from "./content-projection/content-projection.module";
 import {ViewEncapsulationModule} from './view-encapsulation/view-encapsulation.module';
+import {CustomDirectivesModule} from './custom-directives/custom-directives.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import {ViewEncapsulationModule} from './view-encapsulation/view-encapsulation.m
         BrowserModule,
         AppRoutingModule,
         ContentProjectionModule,
-        ViewEncapsulationModule
+        ViewEncapsulationModule,
+        CustomDirectivesModule
     ],
   providers: [],
   bootstrap: [AppComponent]

@@ -13,10 +13,8 @@ import {ThreeComponent} from './three/three.component';
     ],
     exports: [
         ViewEncapsulationComponent
-
     ],
     imports: [
-
     ]
 })
 export class ViewEncapsulationModule { }
