@@ -1,26 +1,19 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import {ContentProjectionModule} from "./content-projection/content-projection.module";
-import {ViewEncapsulationModule} from './view-encapsulation/view-encapsulation.module';
-import {CustomDirectivesModule} from './custom-directives/custom-directives.module';
-import {MyForModule} from './my-for/my-for.module';
+import {AppComponent} from './app.component';
+import {FileSizePipe} from './filesize.pipe';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        ContentProjectionModule,
-        ViewEncapsulationModule,
-        CustomDirectivesModule,
-        MyForModule
+    declarations: [
+        AppComponent,
+        FileSizePipe
     ],
-  providers: [],
-  bootstrap: [AppComponent]
+    imports: [
+        BrowserModule
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
