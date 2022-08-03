@@ -15,7 +15,8 @@ import {Product} from '../../models/product.interface';
 
                 <stock-selector
                     [parent]="form"
-                    [products]="products">
+                    [products]="products"
+                    (added)="addStock($event)">
                 </stock-selector>
 
                 <stock-product
@@ -38,11 +39,11 @@ import {Product} from '../../models/product.interface';
 export class StockInventoryComponent {
 
     products: Product[] = [
-        { "id": 1, "price": 2800, "name": "MacBook Pro" },
-        { "id": 2, "price": 50, "name": "USB-C Adaptor" },
-        { "id": 3, "price": 400, "name": "iPod" },
-        { "id": 4, "price": 900, "name": "iPhone" },
-        { "id": 5, "price": 600, "name": "Apple Watch" }
+        {"id": 1, "price": 2800, "name": "MacBook Pro"},
+        {"id": 2, "price": 50, "name": "USB-C Adaptor"},
+        {"id": 3, "price": 400, "name": "iPod"},
+        {"id": 4, "price": 900, "name": "iPhone"},
+        {"id": 5, "price": 600, "name": "Apple Watch"}
     ];
 
     form = new FormGroup({
@@ -50,10 +51,10 @@ export class StockInventoryComponent {
             branch: new FormControl(''),
             code: new FormControl('')
         }),
-        selector: this.createStock({ product_id: '', quantity: 10 }),
+        selector: this.createStock({product_id: '', quantity: 10}),
         stock: new FormArray([
-            this.createStock({ product_id: 1, quantity: 10 }),
-            this.createStock({ product_id: 3, quantity: 50 })
+            this.createStock({product_id: 1, quantity: 10}),
+            this.createStock({product_id: 3, quantity: 50})
         ])
     });
 
@@ -62,6 +63,11 @@ export class StockInventoryComponent {
             product_id: new FormControl(parseInt(stock.product_id, 10) || ''),
             quantity: new FormControl(stock.quantity || 10)
         });
+    }
+
+    addStock(stock: any) {
+        const control = this.form.get('stock') as FormArray;
+        control.push(this.createStock(stock));
     }
 
     onSubmit() {
